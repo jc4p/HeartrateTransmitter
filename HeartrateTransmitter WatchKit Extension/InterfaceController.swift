@@ -8,9 +8,9 @@
 import WatchKit
 import Foundation
 import HealthKit
+import WatchConnectivity
 
-
-class InterfaceController: WKInterfaceController, HKWorkoutSessionDelegate {
+class InterfaceController: WKInterfaceController, HKWorkoutSessionDelegate, WCSessionDelegate {
 
     var hkStore: HKHealthStore?
     var isRunning = false
@@ -20,6 +20,8 @@ class InterfaceController: WKInterfaceController, HKWorkoutSessionDelegate {
     let heartRateUnit = HKUnit(from: "count/min")
     var hkQuery: HKAnchoredObjectQuery?
     
+    var connection: WCSession?
+
     @IBOutlet var rateLabel: WKInterfaceLabel!
     @IBOutlet var toggleButton: WKInterfaceButton!
     
@@ -28,6 +30,12 @@ class InterfaceController: WKInterfaceController, HKWorkoutSessionDelegate {
         initHealthStore()
         
         self.rateLabel.setText("")
+
+        if WCSession.isSupported() {
+            connection = WCSession.default
+            connection?.delegate = self
+            connection?.activate()
+        }
     }
     
     override func willActivate() {
@@ -57,8 +65,15 @@ class InterfaceController: WKInterfaceController, HKWorkoutSessionDelegate {
     
     func setRate(bpm: Int) {
         self.rateLabel.setText(String(bpm))
-        
-        // also send to phone?
+
+        if (self.connection?.activationState == WCSessionActivationState.activated) {
+            let message = ["bpm": String(bpm)]
+            self.connection?.sendMessage(message, replyHandler: nil, errorHandler: nil)
+        }
+    }
+
+    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
+        // Init of WatchConnectivity session complete
     }
     
     

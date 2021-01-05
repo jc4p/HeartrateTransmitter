@@ -7,8 +7,9 @@
 
 import UIKit
 import HealthKit
+import WatchConnectivity
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, WCSessionDelegate {
     
     @IBOutlet var hkLabel: UILabel!
     @IBOutlet var rateLabel: UILabel!
@@ -17,12 +18,39 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        if WCSession.isSupported() {
+            let session = WCSession.default
+            session.delegate = self
+            session.activate()
+        }
+
         hkStore = HKHealthStore()
         hkLabel.text = "HealthKit Store: DISABLED"
-        
+
         initHealthStore()
     }
     
+    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
+        // activated
+    }
+
+    func sessionDidBecomeInactive(_ session: WCSession) {
+        // inactivated
+    }
+
+    func sessionDidDeactivate(_ session: WCSession) {
+        // deactivated
+    }
+
+    func session(_ session: WCSession, didReceiveMessage message: [String : Any]) {
+        let rate = message["bpm"] as! String
+
+        DispatchQueue.main.async {
+            self.rateLabel.text = rate
+        }
+    }
+
     private func initHealthStore() {
         let sampleTypes = HKSampleType.quantityType(forIdentifier: HKQuantityTypeIdentifier.heartRate)!
         
