@@ -41,6 +41,10 @@
 	</dict>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>NSHealthUpdateUsageDescription</key>
+	<string>Live update your recorded heart rate.</string>
+	<key>NSHealthShareUsageDescription</key>
+	<string>Live update your recorded heart rate.</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

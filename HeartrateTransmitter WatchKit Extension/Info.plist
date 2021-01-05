@@ -18,6 +18,10 @@
 	<string>$(PRODUCT_BUNDLE_PACKAGE_TYPE)</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
+	<key>NSHealthUpdateUsageDescription</key>
+	<string>Track your heart rate</string>
+	<key>NSHealthShareUsageDescription</key>
+	<string>Track your heart rate</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>CLKComplicationPrincipalClass</key>

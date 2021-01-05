@@ -1,15 +1,36 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="11134" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AgC-eL-Hgc">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="17701" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AgC-eL-Hgc">
+    <device id="watch42"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11106"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="11055"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="17500"/>
     </dependencies>
     <scenes>
         <!--Interface Controller-->
         <scene sceneID="aou-V4-d1y">
             <objects>
-                <controller id="AgC-eL-Hgc" customClass="InterfaceController" customModuleProvider="target"/>
+                <controller id="AgC-eL-Hgc" customClass="InterfaceController" customModule="HeartrateTransmitter_WatchKit_App" customModuleProvider="target">
+                    <items>
+                        <label alignment="center" text="Heart Rate:" textAlignment="center" id="u5z-b1-CY2"/>
+                        <separator alignment="left" id="hwD-2V-mzI">
+                            <color key="color" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </separator>
+                        <label alignment="center" text="80" textAlignment="center" numberOfLines="3" id="zdS-v1-q3U">
+                            <fontDescription key="font" style="UICTFontTextStyleTitle0"/>
+                        </label>
+                        <button width="1" alignment="left" verticalAlignment="bottom" title="Start" id="FOF-D6-iEq">
+                            <connections>
+                                <action selector="toggleButtonPressed" destination="AgC-eL-Hgc" id="c5d-0c-w6q"/>
+                            </connections>
+                        </button>
+                    </items>
+                    <connections>
+                        <outlet property="rateLabel" destination="zdS-v1-q3U" id="i45-7H-yh1"/>
+                        <outlet property="toggleButton" destination="FOF-D6-iEq" id="SX1-BG-0ad"/>
+                    </connections>
+                </controller>
             </objects>
+            <point key="canvasLocation" x="-16" y="-20"/>
         </scene>
     </scenes>
 </document>
